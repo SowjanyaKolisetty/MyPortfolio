@@ -1,0 +1,102 @@
+@import "tailwindcss" source(none);
+@source "../src";
+@import "tw-animate-css";
+
+@theme inline {
+  --font-display: "Sora", "Inter", system-ui, sans-serif;
+  --font-sans: "Inter", system-ui, sans-serif;
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-accent-blue: var(--accent-blue);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-teal: var(--accent-teal);
+  --radius-lg: 1.25rem;
+}
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+:root {
+  --background: oklch(0.995 0.002 250);
+  --foreground: oklch(0.18 0.02 265);
+  --muted: oklch(0.96 0.008 255);
+  --muted-foreground: oklch(0.5 0.02 260);
+  --card: oklch(1 0 0);
+  --border: oklch(0.92 0.01 260);
+  --primary: oklch(0.55 0.2 275);
+  --primary-foreground: oklch(0.99 0 0);
+  --accent-blue: oklch(0.62 0.19 250);
+  --accent-purple: oklch(0.58 0.22 295);
+  --accent-teal: oklch(0.72 0.13 190);
+
+  --glass-bg: color-mix(in oklab, white 70%, transparent);
+  --glass-border: color-mix(in oklab, white 60%, transparent);
+
+  --gradient-primary: linear-gradient(135deg, oklch(0.62 0.19 250), oklch(0.58 0.22 295), oklch(0.72 0.13 190));
+  --gradient-soft: linear-gradient(135deg, oklch(0.97 0.03 250), oklch(0.97 0.04 295), oklch(0.97 0.03 190));
+  --shadow-glow: 0 20px 60px -20px color-mix(in oklab, oklch(0.58 0.22 295) 35%, transparent);
+  --shadow-soft: 0 10px 40px -15px color-mix(in oklab, oklch(0.55 0.2 275) 18%, transparent);
+}
+
+.dark {
+  --background: oklch(0.16 0.02 265);
+  --foreground: oklch(0.97 0.01 255);
+  --muted: oklch(0.22 0.02 265);
+  --muted-foreground: oklch(0.7 0.02 260);
+  --card: oklch(0.2 0.02 265);
+  --border: oklch(0.28 0.02 265);
+  --primary: oklch(0.72 0.18 285);
+  --primary-foreground: oklch(0.15 0.02 265);
+
+  --glass-bg: color-mix(in oklab, oklch(0.22 0.02 265) 60%, transparent);
+  --glass-border: color-mix(in oklab, white 10%, transparent);
+  --gradient-soft: linear-gradient(135deg, oklch(0.28 0.04 250), oklch(0.28 0.05 295), oklch(0.28 0.04 190));
+}
+
+@layer base {
+  * { border-color: var(--color-border); }
+  html { scroll-behavior: smooth; }
+  body {
+    background-color: var(--color-background);
+    color: var(--color-foreground);
+    font-family: var(--font-sans);
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+    -webkit-font-smoothing: antialiased;
+  }
+  h1, h2, h3, h4 { font-family: var(--font-display); letter-spacing: -0.02em; }
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: 0.001ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.001ms !important;
+    }
+  }
+}
+
+@utility glass {
+  background: var(--glass-bg);
+  backdrop-filter: blur(20px) saturate(160%);
+  border: 1px solid var(--glass-border);
+  box-shadow: var(--shadow-soft);
+}
+
+
+@utility text-gradient {
+  background: var(--gradient-primary);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+@utility bg-mesh {
+  background-image:
+    radial-gradient(circle at 15% 10%, color-mix(in oklab, oklch(0.62 0.19 250) 18%, transparent) 0%, transparent 45%),
+    radial-gradient(circle at 85% 20%, color-mix(in oklab, oklch(0.58 0.22 295) 18%, transparent) 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, color-mix(in oklab, oklch(0.72 0.13 190) 16%, transparent) 0%, transparent 45%);
+}
